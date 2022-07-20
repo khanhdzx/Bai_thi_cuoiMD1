@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<table border="1" style="width: 100%">
+    <h1 style="color: darkgreen" align="center"> DANH SÁCH NHẠC VIP </h1>
+    <input id="vip1" type="text">
+    <button onclick="createdStudent()"> Thêm vào danh sách vip</button>
+    <span id="vip5"></span>
+    <tr>
+        <th>STT</th>
+        <th> Thể loại nhạc</th>
+        <th> Edit</th>
+        <th> Delete</th>
+        <tbody id="vip3"></tbody>
+</table>
+<script>
+    class Category {
+        id;
+        name;
+
+        constructor(id, name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        getId() {
+            return this.id;
+        }
+
+        setId(id) {
+            this.id = id;
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        setName(name) {
+            this.name = name;
+        }
+    }
+
+    let mycavas = [];
+    let vip1 = new Category(1, 'Nhạc Đỏ')
+    let vip2 = new Category(2, 'Nhạc remix')
+    let vip3 = new Category(3, 'Nhạc trẻ')
+    let vip4 = new Category(4, 'Nhạc vàng')
+    let vip5 = new Category(5, 'Nhạc rock')
+    mycavas.push(vip1, vip2, vip3, vip4, vip5);
+
+    // let mycavas =['Nhạc remix','Nhạc đỏ','Nhạc rock','Nhạc trẻ','Nhạc vàng']
+    function vip() {
+        let add = '';
+        for (let i = 0; i < mycavas.length; i++) {
+            let j = i + 1;
+            add += '<tr>' +
+                '<td> ' + j + '</td>' +
+                '<td>' + mycavas[i].name+ '</td>' +
+                '<td><button style="background-color: darkblue" onclick="update(' + i + ')">Chỉnh sửa danh sách</button> </td>' +
+                '<td><button style="background-color: crimson" onclick="xoaAmNhac(' + i+ ')">xóa danh sách cùng hàng</button> </td>' +
+                '</tr>'
+
+        }
+        document.getElementById('vip3').innerHTML = add;
+    }
+
+    vip();
+
+    function createdStudent() {
+        let vai = document.getElementById('vip1').value;
+
+        if (vai.trim() === '') {
+            document.getElementById('vip5').innerHTML = '<span style="color: firebrick">Không được để trống</span>'
+        } else {
+            mycavas.push(new Category('id',vai));
+            document.getElementById('vip5').innerHTML = '<span style="color: darkblue">Thành Công nạp card 20 chục ngàn</span>'
+            vip();
+        }
+    }
+
+    function update(id) {
+        let edit = prompt('Cập nhật âm nhạc mới', mycavas[id].name)
+        if (edit.trim() === '') {
+            document.getElementById('vip5').innerHTML = '<span style="color: firebrick">Chỉnh sửa không thành công</span>'
+        } else {
+            mycavas[id].name = edit;
+            vip();
+        }
+    }
+
+    function xoaAmNhac(id) {
+        mycavas.splice(id, 1)
+        vip()
+    }
+
+</script>
+</body>
+</html>
