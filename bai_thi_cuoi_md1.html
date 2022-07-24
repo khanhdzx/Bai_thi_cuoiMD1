@@ -71,13 +71,23 @@
 
     function createdStudent() {
         let vai = document.getElementById('vip1').value;
-
+        let check = false
         if (vai.trim() === '') {
             document.getElementById('vip5').innerHTML = '<span style="color: firebrick">Không được để trống</span>'
         } else {
-            mycavas.push(new Category('id',vai));
-            document.getElementById('vip5').innerHTML = '<span style="color: darkblue">Thành Công nạp card 20 chục ngàn</span>'
-            vip();
+            for (let a = 0;a<mycavas.length;a++ ){
+                if (vai.toLowerCase()=== mycavas[a].name.toLowerCase()){
+                    check = true
+                }
+            }
+            if (!check){
+                document.getElementById('vip5').innerHTML ='<span style="color: firebrick">Không được lap lai</span>'
+            }
+            // mycavas.push(new Category('id',vai));
+            // document.getElementById('vip5').innerHTML = '<span style="color: darkblue">Thành Công nạp card 20 chục ngàn</span>'
+            // vip();
+        }if (check){
+            mycavas.push(new Category(mycavas[mycavas.length-1].id+1,vai))
         }
     }
 
